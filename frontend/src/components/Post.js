@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 class Post extends Component {
     constructor() {
         super();
@@ -24,10 +25,9 @@ class Post extends Component {
                             <i className="far fa-thumbs-down"></i>
                         )} {post.voteScore}&nbsp;&nbsp;&nbsp;&nbsp;<i className="far fa-comments"></i> {post.commentCount} {post.commentCount > 1 ? 'comments': 'comment'}
                     </p>
-                    
                 </div>
                 <div className="card-footer text-muted">
-                    <a href = {`/${post.category}/${post.id}`}>View details</a>
+                    <Link to = {`/${post.category}/${post.id}`}>View details</Link>
                 </div>
             </div>
         )

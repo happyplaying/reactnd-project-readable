@@ -53,9 +53,9 @@ class App extends Component {
                                     </div>
                                     <div className="card-body">
                                         <p>{category.description}</p>                                        
-                                        <a href={`/${category.path}`}>
+                                        <Link to={`/${category.path}`}>
                                             <button type="button" className="btn btn-lg btn-block btn-outline-primary">View details</button>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             ))}
