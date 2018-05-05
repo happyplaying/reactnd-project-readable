@@ -10,10 +10,14 @@ I'm using *Node v10.0.0* and *npm 6.0.0*
 
 First of all, download or clone this repository.
 
+```
+> git clone https://github.com/happyplaying/reactnd-project-readable.git
+```
+
 Then, go to project folder using:
 
 ```
-> cd readable
+> cd reactnd-project-readable
 ```
 
 ## To install and run backend project
