@@ -1,27 +1,10 @@
 import { combineReducers } from 'redux'
-import {
-    ADD_POST,
-    ADD_CATEGORY
-} from '../actions'
-
-const posts = (state = [], action) => {
-    switch (action.type) {
-        case ADD_POST :
-            return state.concat(action.posts)
-        default :
-            return state
-    }
-}
-const categories = (state = [], action) => {
-    switch (action.type) {
-        case ADD_CATEGORY :
-            return state.concat(action.categories)
-        default :
-            return state
-    }
-}
+import Category from './Category'
+import Post from './Post'
+import Comment from './Comment'
 
 export default combineReducers({
-  posts,
-  categories,
+  categories: Category,
+  posts: Post,
+  comments: Comment,
 })

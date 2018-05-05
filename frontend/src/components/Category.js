@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as API from '../utils/api';
 import Post from './Post';
 import AddPost from './AddPost';
 import { connect } from 'react-redux'
@@ -9,7 +8,7 @@ class Category extends Component {
     constructor() {
         super();
         this.state = {
-            sort:'date',
+            sort:'timestamp',
         }
     };
     handleSort(type){

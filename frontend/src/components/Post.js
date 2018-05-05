@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 class Post extends Component {
-    constructor() {
-        super();
-        this.state = {
-        }
-    };
     render() {
         const {post} = this.props;
         return (
@@ -15,7 +10,7 @@ class Post extends Component {
                 </div>
                 <div className="card-body">
                     <h3 className="blog-post-title">{post.title}</h3>
-                    <p className="blog-post-meta">{post.date}, by {post.author}</p>
+                    <p className="blog-post-meta">{post.timestamp}, by {post.author}</p>
                     <p>{post.body.substring(0,150)} ...</p>
                     <hr />
                     <p >
