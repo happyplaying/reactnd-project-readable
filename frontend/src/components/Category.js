@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Post from './Post';
 import AddPost from './AddPost';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
 
 class Category extends Component {
     constructor() {

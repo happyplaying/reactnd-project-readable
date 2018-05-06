@@ -5,6 +5,7 @@ import Comment from './Comment';
 import { addPost, receiveComments, removePost, increasePostScore, decreasePostScore} from '../actions';
 import EditPost from './EditPost';
 import AddComment from './AddComment';
+import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
 class PostDetails extends Component {
     constructor() {
         super();
@@ -57,7 +58,7 @@ class PostDetails extends Component {
                 { post.map( p => (
                     <div className="post-body" key={p.id}>
                         <h3 className="blog-post-title">{p.title}</h3>
-                        <p className="blog-post-meta">{p.timestamp}, by {p.author}</p>
+                        <p className="blog-post-meta">{dateYYYYMMDDHHMMSS(p.timestamp)}, by {p.author}</p>
                         <p>{p.body.substring(0,150)} ...</p>
                         <p >
                             {p.voteScore >= 0 ? (

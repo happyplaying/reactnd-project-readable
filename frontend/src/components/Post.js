@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
 class Post extends Component {
     render() {
         const {post} = this.props;
@@ -10,7 +11,7 @@ class Post extends Component {
                 </div>
                 <div className="card-body">
                     <h3 className="blog-post-title">{post.title}</h3>
-                    <p className="blog-post-meta">{post.timestamp}, by {post.author}</p>
+                    <p className="blog-post-meta">{dateYYYYMMDDHHMMSS(post.timestamp)}, by {post.author}</p>
                     <p>{post.body.substring(0,150)} ...</p>
                     <hr />
                     <p >

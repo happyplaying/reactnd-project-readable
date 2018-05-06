@@ -3,6 +3,7 @@ import { increaseCommentScore, decreaseCommentScore, removeComment} from '../act
 import { connect } from 'react-redux';
 import * as API from '../utils/api';
 import { editComment} from '../actions';
+import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
 class Comment extends Component {
     constructor() {
         super();
@@ -11,6 +12,7 @@ class Comment extends Component {
             commentBody:"",
         }
     };
+    
     increaseCommentScore(id){
         API.increaseCommentScore(id).then(results =>{
             this.props.dispatch(increaseCommentScore(id));
@@ -61,7 +63,7 @@ class Comment extends Component {
                     <p>{comment.body}</p>
                 )}
                 
-                <p className="blog-post-meta"><i>{comment.timestamp}, by {comment.author}</i></p>
+                <p className="blog-post-meta"><i>{dateYYYYMMDDHHMMSS(comment.timestamp)}, by {comment.author}</i></p>
                 <p >
                     {comment.voteScore >= 0 ? (
                         <i className="far fa-thumbs-up"></i>
