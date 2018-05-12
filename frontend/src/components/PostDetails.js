@@ -100,6 +100,7 @@ class PostDetails extends Component {
                             <Comment
                                 key={c.id}
                                 comment = {c}
+                                postId = {postId}
                             />
                         ))}
                         { post.map( p => (

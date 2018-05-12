@@ -13,19 +13,19 @@ class Comment extends Component {
         }
     };
     
-    increaseCommentScore(id){
-        API.increaseCommentScore(id).then(results =>{
-            this.props.dispatch(increaseCommentScore(id));
+    increaseCommentScore(postId, commentId){
+        API.increaseCommentScore(commentId).then(results =>{
+            this.props.dispatch(increaseCommentScore(postId, commentId));
         })
     }
-    decreaseCommentScore(id){
-        API.decreaseCommentScore(id).then(results =>{
-            this.props.dispatch(decreaseCommentScore(id));
+    decreaseCommentScore(postId, commentId){
+        API.decreaseCommentScore(commentId).then(results =>{
+            this.props.dispatch(decreaseCommentScore(postId, commentId));
         })
     }
-    removeComment(id){
-        API.removeComment(id).then(results =>{
-            this.props.dispatch(removeComment(id));
+    removeComment(postId, commentId){
+        API.removeComment(commentId).then(results =>{
+            this.props.dispatch(removeComment(postId, commentId));
         })
     }
     handleEditComment(status){
@@ -48,7 +48,7 @@ class Comment extends Component {
         this.setState({[type]:value})
     }
     render() {
-        const {comment} = this.props;
+        const {comment, postId} = this.props;
         return (
             <div>
                 {this.state.editFlag ? (
@@ -71,10 +71,10 @@ class Comment extends Component {
                         <i className="far fa-thumbs-down"></i>
                     )} {comment.voteScore}
                 </p>
-                <button className="btn btn-sm btn-info" onClick = {event => this.increaseCommentScore(comment.id)}>Like</button>
-                <button className="btn btn-sm btn-info" onClick = {event => this.decreaseCommentScore(comment.id)}>Dislike</button>
+                <button className="btn btn-sm btn-info" onClick = {event => this.increaseCommentScore(postId, comment.id)}>Like</button>
+                <button className="btn btn-sm btn-info" onClick = {event => this.decreaseCommentScore(postId, comment.id)}>Dislike</button>
                 <button className="btn btn-sm btn-primary" onClick = {event => this.handleEditComment(this.state.editFlag ? false : true)}>{this.state.editFlag ? 'Save' : 'Edit'}</button>
-                <button type="button" className="btn btn-sm btn-danger" onClick = {event => this.removeComment(comment.id)}>Delete</button>
+                <button type="button" className="btn btn-sm btn-danger" onClick = {event => this.removeComment(postId, comment.id)}>Delete</button>
                 <hr />
             </div>
         )

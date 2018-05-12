@@ -10,63 +10,75 @@ import {
 export default (initialState = {}, action) => {
     switch (action.type) {
         case RECEIVE_COMMENTS:
-            let newState = { ...initialState }
+            let nReceiveComments = { ...initialState }
             if (action.comments.length > 0) {
                 const key = action.comments[0].parentId
-                newState[key] = action.comments
+                nReceiveComments[key] = action.comments
             } else {
-                newState[action.postId] = []
+                nReceiveComments[action.postId] = []
             }
-            return newState;
+            return nReceiveComments;
         case INCREASE_COMMENT_SCORE:
-            const nState = { ...initialState }
-            let nKeys = Object.keys(initialState)
-            nKeys.forEach( k => {
-                nState[k] = initialState[k].map( e => {
-                    if (e.id === action.id) {
-                        return { ...e, voteScore: e.voteScore + 1}
-                    }
-                    return e;
-                })
-            });
-            return nState;
+            //Deep clone on the initialState
+            let nIncreaseCommentScore = {}
+            for(let i in initialState){
+                nIncreaseCommentScore[i] = [];
+                for(let j of initialState[i]){
+                    nIncreaseCommentScore[i].push({...j})
+                }
+            }
+            for(let i of nIncreaseCommentScore[action.postId]){
+                if(i.id === action.commentId){
+                    i.voteScore += 1;
+                }
+            }
+            return nIncreaseCommentScore;
         case DECREASE_COMMENT_SCORE:
-            const dState = { ...initialState }
-            let dKeys = Object.keys(initialState)
-            dKeys.forEach( k => {
-                dState[k] = initialState[k].map( e => {
-                    if (e.id === action.id) {
-                        return { ...e, voteScore: e.voteScore - 1}
-                    }
-                    return e;
-                })
-            });
-            return dState;  
+            //Deep clone on the initialState
+            let nDecreaseCommentScore = {}
+            for(let i in initialState){
+                nDecreaseCommentScore[i] = [];
+                for(let j of initialState[i]){
+                    nDecreaseCommentScore[i].push({...j})
+                }
+            }
+            for(let i of nDecreaseCommentScore[action.postId]){
+                if(i.id === action.commentId){
+                    i.voteScore -= 1;
+                }
+            }
+            return nDecreaseCommentScore; 
         case REMOVE_COMMENT:
-            const rState = { ...initialState }
-            let rKeys = Object.keys(initialState)
-            rKeys.forEach( k => {
-                rState[k] = initialState[k].filter(e => e.id !== action.id)
-            });
-            return rState;
+            //Deep clone on the initialState
+            let nRemoveComment = {}
+            for(let i in initialState){
+                nRemoveComment[i] = [];
+                for(let j of initialState[i]){
+                    nRemoveComment[i].push({...j})
+                }
+            }
+            nRemoveComment[action.postId] = nRemoveComment[action.postId].filter(e => e.id !== action.commentId);
+            return nRemoveComment;
         case ADD_COMMENT:
-            const aState = { ...initialState }
-            const parentId = action.comment.parentId
-            aState[parentId] = [ ...aState[parentId], action.comment ]
-            return aState;      
+            const nAddComment = { ...initialState }
+            nAddComment[action.comment.parentId] = [ ...nAddComment[action.comment.parentId], action.comment ]
+            return nAddComment;      
         case EDIT_COMMENT:
-            const { comment } = action;
-            const eState = { ...initialState }
-            let eKeys = Object.keys(initialState)
-            eKeys.forEach( k => {
-                eState[k] = initialState[k].map( e => {
-                    if (e.id === comment.id) {
-                        return { ...e, body: comment.body, timestamp: comment.timestamp }
-                    }
-                    return e;
-                })
-            });
-            return eState;
+            //Deep clone on the initialState
+            let nEditComment = {}
+            for(let i in initialState){
+                nEditComment[i] = [];
+                for(let j of initialState[i]){
+                    nEditComment[i].push({...j})
+                }
+            }
+            for(let i of nEditComment[action.comment.parentId]){
+                if(i.id === action.comment.id){
+                    i.body = action.comment.body;
+                    i.timestamp = action.comment.timestamp;
+                }
+            }
+            return nEditComment;
         default:
           return initialState
     }

@@ -3,21 +3,15 @@ import {
     ADD_POST,
     EDIT_POST,
     REMOVE_POST,
-
     RECEIVE_CATEGORIES,
-
     RECEIVE_COMMENTS,
     ADD_COMMENT,
     REMOVE_COMMENT,
     EDIT_COMMENT,
-
-
     INCREASE_POST_SCORE,
     DECREASE_POST_SCORE,
-
     INCREASE_COMMENT_SCORE,
     DECREASE_COMMENT_SCORE,
-
 } from './types'
 
 export const addPost = post => ({
@@ -32,7 +26,6 @@ export const increasePostScore = id => ({
     type: INCREASE_POST_SCORE,
     id
 })
-
 export const decreasePostScore = id => ({
     type: DECREASE_POST_SCORE,
     id
@@ -45,29 +38,25 @@ export const editPost = post => ({
     type: EDIT_POST,
     post
 })
-
 export const receiveCategories = categories => ({
     type: RECEIVE_CATEGORIES,
     categories
 })
-
-
 export const receiveComments = (comments, postId) =>  ({
     type: RECEIVE_COMMENTS,
     comments,
     postId
 });
-
-export const increaseCommentScore = id => ({
+export const increaseCommentScore = (postId, commentId) => ({
     type: INCREASE_COMMENT_SCORE,
-    id
+    postId,
+    commentId
 })
-
-export const decreaseCommentScore = id => ({
+export const decreaseCommentScore = (postId, commentId) => ({
     type: DECREASE_COMMENT_SCORE,
-    id
+    postId,
+    commentId
 })
-
 export const editComment = comment => ({
     type: EDIT_COMMENT,
     comment
@@ -76,7 +65,8 @@ export const addComment = comment => ({
     type: ADD_COMMENT,
     comment
 })
-export const removeComment = id => ({
+export const removeComment = (postId, commentId) => ({
     type: REMOVE_COMMENT,
-    id
+    postId,
+    commentId
 })

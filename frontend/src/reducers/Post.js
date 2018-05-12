@@ -16,37 +16,32 @@ export default (state = [], action) => {
         case REMOVE_POST:
             return state.filter(p => p.id !== action.id);
         case EDIT_POST:
-            const { post } = action;
-            return state.map(p => {
-                if (p.id !== post.id) {
-                    return p;
+            //copy the current state
+            let nEditPost = state.map( p => Object.assign({}, p));
+            //modify the changes
+            for(let i of nEditPost){
+                if (i.id === action.post.id) {
+                    i.title = action.post.title;
+                    i.body = action.post.body;
                 }
-                return {
-                    ...p,
-                    title: post.title,
-                    body: post.body
-                }
-            });
+            }
+            return nEditPost;
         case INCREASE_POST_SCORE:
-            return state.map(p => {
-                if (p.id !== action.id) {
-                    return p;
+            let nIncreasePostScore = state.map( p => Object.assign({}, p));
+            for(let i of nIncreasePostScore){
+                if (i.id === action.id) {
+                    i.voteScore += 1;
                 }
-                return {
-                    ...p,
-                    voteScore: p.voteScore + 1
-                }
-            });
+            }
+            return nIncreasePostScore;
         case DECREASE_POST_SCORE:
-            return state.map(p => {
-                if(p.id !== action.id){
-                    return p;
+            let nDecreasePostScore = state.map( p => Object.assign({}, p));
+            for(let i of nDecreasePostScore){
+                if (i.id === action.id) {
+                    i.voteScore -= 1;
                 }
-                return {
-                    ...p,
-                    voteScore: p.voteScore - 1
-                }
-            });
+            }
+            return nDecreasePostScore;
         default :
             return state
     }
