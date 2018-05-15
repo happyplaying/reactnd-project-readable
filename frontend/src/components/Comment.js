@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { increaseCommentScore, decreaseCommentScore, removeComment} from '../actions';
+import { increaseCommentScore, decreaseCommentScore, removeComment,editComment,editPostCommentsCount} from '../actions';
 import { connect } from 'react-redux';
 import * as API from '../utils/api';
-import { editComment} from '../actions';
 import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
 class Comment extends Component {
     constructor() {
@@ -26,6 +25,7 @@ class Comment extends Component {
     removeComment(postId, commentId){
         API.removeComment(commentId).then(results =>{
             this.props.dispatch(removeComment(postId, commentId));
+            this.props.dispatch(editPostCommentsCount(postId, -1));
         })
     }
     handleEditComment(status){

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addComment } from '../actions';
+import { addComment, editPostCommentsCount } from '../actions';
 import { connect } from 'react-redux';
 import * as API from '../utils/api';
 class AddComment extends Component {
@@ -23,7 +23,9 @@ class AddComment extends Component {
             parentId: this.props.postId,
         }
         API.addComment(comment).then(results =>{
+            console.log(results);
             this.props.dispatch(addComment(results));
+            this.props.dispatch(editPostCommentsCount(results.parentId, 1));
             this.setState({author:'',comment:''})
         })
     }   

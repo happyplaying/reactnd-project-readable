@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
+import PostActions from './PostActions';
 class Post extends Component {
     render() {
         const {post} = this.props;
@@ -21,6 +22,9 @@ class Post extends Component {
                             <i className="far fa-thumbs-down"></i>
                         )} {post.voteScore}&nbsp;&nbsp;&nbsp;&nbsp;<i className="far fa-comments"></i> {post.commentCount} {post.commentCount > 1 ? 'comments': 'comment'}
                     </p>
+                    <PostActions
+                        postId = {post.id}
+                    />
                 </div>
                 <div className="card-footer text-muted">
                     <Link to = {`/${post.category}/${post.id}`}>View details</Link>

@@ -3,9 +3,9 @@ import * as API from '../utils/api';
 import { connect } from 'react-redux';
 import Comment from './Comment';
 import { addPost, receiveComments, removePost, increasePostScore, decreasePostScore} from '../actions';
-import EditPost from './EditPost';
 import AddComment from './AddComment';
 import NotFound from './NotFound';
+import PostActions from './PostActions';
 import { dateYYYYMMDDHHMMSS } from '../utils/helpers';
 class PostDetails extends Component {
     constructor() {
@@ -69,19 +69,9 @@ class PostDetails extends Component {
                                         <i className="far fa-thumbs-down"></i>
                                     )} {p.voteScore}&nbsp;&nbsp;&nbsp;&nbsp;<i className="far fa-comments"></i> {p.commentCount} {p.commentCount > 1 ? 'comments': 'comment'}
                                 </p>
-                                <button className="btn btn-sm btn-info" onClick = {event => this.increasePostScore(p.id)}>Like</button>
-                                <button className="btn btn-sm btn-info" onClick = {event => this.decreasePostScore(p.id)}>Dislike</button>
-                                <button className="btn btn-sm btn-primary" data-toggle="modal" data-target="#editPostModal">Edit</button>
-                                { post.map( p => (
-                                    <button type="button" className="btn btn-sm btn-danger" key = {p.id} onClick = {event => this.removePost(p.id)}>Delete</button>
-                                ))}
-                                { post.map( p => (
-                                    <EditPost
-                                        key={p.id}
-                                        post = {p}
-                                        title = 'Edit a post' 
-                                    />  
-                                ))}
+                                <PostActions
+                                    postId = {p.id}
+                                />
                                 <hr />
                                 <div className="row">
                                     <div className="col-sm-9">

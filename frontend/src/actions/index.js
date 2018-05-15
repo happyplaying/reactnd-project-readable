@@ -2,6 +2,7 @@ import {
     RECEIVE_POSTS,
     ADD_POST,
     EDIT_POST,
+    EDIT_POST_COMMENTS_COUNT,
     REMOVE_POST,
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
@@ -37,6 +38,11 @@ export const receivePosts = posts => ({
 export const editPost = post => ({
     type: EDIT_POST,
     post
+})
+export const editPostCommentsCount = (postId, value) => ({
+    type : EDIT_POST_COMMENTS_COUNT,
+    postId,
+    value,
 })
 export const receiveCategories = categories => ({
     type: RECEIVE_CATEGORIES,

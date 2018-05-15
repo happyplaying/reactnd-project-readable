@@ -4,7 +4,8 @@ import {
     DECREASE_POST_SCORE,
     ADD_POST,
     REMOVE_POST,
-    EDIT_POST
+    EDIT_POST,
+    EDIT_POST_COMMENTS_COUNT,
 } from '../actions/types'
 
 export default (state = [], action) => {
@@ -42,6 +43,14 @@ export default (state = [], action) => {
                 }
             }
             return nDecreasePostScore;
+        case EDIT_POST_COMMENTS_COUNT:
+            let nEditPostCommentsCount = state.map( p => Object.assign({}, p));
+            for(let i of nEditPostCommentsCount){
+                if (i.id === action.postId) {
+                    i.commentCount += Number(action.value);
+                }
+            }
+            return nEditPostCommentsCount;
         default :
             return state
     }
